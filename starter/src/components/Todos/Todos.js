@@ -54,16 +54,6 @@ const Todos = () => {
             />
           </label>
         </form>
-        <button
-          onClick={() => {
-            dispatch({
-              type: 'add-error-todo',
-              user: currentUser,
-            });
-          }}
-        >
-          Add Error Todo
-        </button>
       </section>
       <ol className={styles.list}>
         {todos.map((todo, index) => {
