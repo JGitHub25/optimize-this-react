@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './Todos.module.css';
 
 const TodoItem = (props) => {
@@ -61,4 +61,4 @@ const TodoItem = (props) => {
   );
 };
 
-export default TodoItem;
+export default memo(TodoItem);

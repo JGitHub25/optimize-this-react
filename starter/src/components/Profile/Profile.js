@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import useToggle from '../../hooks/useToggle';
 import { ProfileContext } from '../../providers/ProfileProvider';
 import { checkUsernameValidity } from './checkUsernameValidity.js';
-import getIconOptions from './getIconOptions';
-
 import styles from './Profile.module.css';
+
+
 
 const Profile = () => {
   const {
@@ -18,15 +18,16 @@ const Profile = () => {
   const [iconOptions, setIconOptions] = useState();
 
   useEffect(() => {
-    const load = () => {
-      const userIconOptions = getIconOptions();
+    const load = async () => {
+      const getIconOptions = await import('./getIconOptions.js')
+      const userIconOptions = getIconOptions.default();
       setIconOptions(userIconOptions);
     };
 
     load();
   }, []);
 
-  const isUsernameValid = checkUsernameValidity(name);
+  const isUsernameValid = useMemo(() => checkUsernameValidity(username), [username])
 
   const onSaveProfile = (e) => {
     e.preventDefault();
